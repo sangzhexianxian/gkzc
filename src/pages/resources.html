@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="资料下载_公考真题_备考资料_免费下载">
+  <Header />
+  
+  <section class="page-header" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 50px 0; text-align: center;">
+    <div class="container">
+      <h1 style="font-size: 2rem; margin-bottom: 10px;">资料下载中心</h1>
+      <p style="opacity: 0.9;">海量公考资料免费下载</p>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="filter-tabs">
+        <button class="filter-tab active">全部资料</button>
+        <button class="filter-tab">国考资料</button>
+        <button class="filter-tab">省考资料</button>
+        <button class="filter-tab">行测</button>
+        <button class="filter-tab">申论</button>
+        <button class="filter-tab">面试</button>
+      </div>
+      
+      <div class="resource-list">
+        <article class="resource-item">
+          <div class="resource-icon">📄</div>
+          <div class="resource-info">
+            <h4><a href="#">2024年国考历年真题及答案解析</a></h4>
+            <p>包含近15年国考完整真题试卷及详细答案解析</p>
+            <div class="resource-meta">
+              <span>📅 2024-11 更新</span>
+              <span>📦 PDF | 18.5 MB</span>
+              <span>🔥 下载 25,680 次</span>
+            </div>
+          </div>
+          <button class="download-btn" onclick="showDownloadTip()">立即下载</button>
+        </article>
+        
+        <article class="resource-item">
+          <div class="resource-icon">📄</div>
+          <div class="resource-info">
+            <h4><a href="#">行测高频考点速记手册</a></h4>
+            <p>行测各模块高频考点汇总</p>
+            <div class="resource-meta">
+              <span>📅 2024-10 更新</span>
+              <span>📦 PDF | 9.2 MB</span>
+              <span>🔥 下载 18,340 次</span>
+            </div>
+          </div>
+          <button class="download-btn" onclick="showDownloadTip()">立即下载</button>
+        </article>
+        
+        <article class="resource-item">
+          <div class="resource-icon">📄</div>
+          <div class="resource-info">
+            <h4><a href="#">申论答题模板及万能套话</a></h4>
+            <p>申论各题型答题模板</p>
+            <div class="resource-meta">
+              <span>📅 2024-09 更新</span>
+              <span>📦 PDF | 6.8 MB</span>
+              <span>🔥 下载 21,560 次</span>
+            </div>
+          </div>
+          <button class="download-btn" onclick="showDownloadTip()">立即下载</button>
+        </article>
+        
+        <article class="resource-item">
+          <div class="resource-icon">📄</div>
+          <div class="resource-info">
+            <h4><a href="#">公务员面试技巧大全</a></h4>
+            <p>结构化面试技巧、历年真题解析</p>
+            <div class="resource-meta">
+              <span>📅 2024-08 更新</span>
+              <span>📦 PDF | 5.4 MB</span>
+              <span>🔥 下载 15,780 次</span>
+            </div>
+          </div>
+          <button class="download-btn" onclick="showDownloadTip()">立即下载</button>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+
+<style>
+  .filter-tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+  .filter-tab { padding: 10px 20px; background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius); color: var(--text-primary); font-weight: 500; transition: all 0.3s; cursor: pointer; }
+  .filter-tab:hover, .filter-tab.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+</style>

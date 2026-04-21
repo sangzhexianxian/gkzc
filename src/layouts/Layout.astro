@@ -1,0 +1,81 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  keywords?: string;
+  canonical?: string;
+}
+
+const { 
+  title, 
+  description = '公考资料网提供全面的公务员考试资料，包含国考真题、省考真题、行测资料、申论范文、面试技巧等，助力考生一战成公。',
+  keywords = '公考资料,公务员考试,国考,省考,行测,申论,公务员真题,公务员考试资料,公务员备考',
+  canonical
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="keywords" content={keywords}>
+  <meta name="robots" content="index, follow">
+  {canonical && <link rel="canonical" href={canonical} />}
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:site_name" content="公考资料网">
+  
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/styles/global.css">
+  
+  <!-- 结构化数据 -->
+  <script type="application/ld+json">
+  {JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "公考资料网",
+    "url": "https://gkzc.example.com",
+    "description": "提供全面的公务员考试资料下载",
+    "publisher": {
+      "@type": "Organization",
+      "name": "公考资料网"
+    }
+  })}
+  </script>
+</head>
+<body>
+  <slot />
+  
+  <!-- 下载提示弹窗 -->
+  <div id="download-modal">
+    <div class="modal-content">
+      <h3>获取资料方式</h3>
+      <p>扫码关注公众号<br>回复关键字即可获取下载链接</p>
+      <img src="/images/wechat-qr.png" alt="二维码" />
+      <p style="font-size: 0.9rem;">长按识别二维码，关注后回复"公考资料"</p>
+      <button onclick="hideDownloadTip()">关闭</button>
+    </div>
+  </div>
+
+  <script>
+    function showDownloadTip() {
+      document.getElementById('download-modal').classList.add('show');
+      return false;
+    }
+    
+    function hideDownloadTip() {
+      document.getElementById('download-modal').classList.remove('show');
+    }
+    
+    // 导出给全局使用
+    (window as any).showDownloadTip = showDownloadTip;
+  </script>
+</body>
+</html>

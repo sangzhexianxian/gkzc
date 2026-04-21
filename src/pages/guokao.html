@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="国考资料_历年国考真题_国考行测_申论真题下载" 
+  description="国考资料下载频道，提供国家公务员考试历年真题试卷，包含国考行测真题、国考申论真题、大纲解析等备考资料。"
+  keywords="国考资料,国考真题,国家公务员,国考行测,国考申论"
+>
+  <Header />
+  
+  <section class="page-header" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 50px 0; text-align: center;">
+    <div class="container">
+      <h1 style="font-size: 2rem; margin-bottom: 10px;">国考资料</h1>
+      <p style="opacity: 0.9;">国家公务员考试历年真题及备考资料</p>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="section-title">
+        <h2>📚 国考真题下载</h2>
+      </div>
+      
+      <div class="resource-list">
+        <article class="resource-item">
+          <div class="resource-icon">📄</div>
+          <div class="resource-info">
+            <h4><a href="#">2024年国考真题及答案解析（行测+申论）</a></h4>
+            <p>2024年国家公务员考试完整真题试卷及详细答案解析</p>
+            <div class="resource-meta">
+              <span>📅 2024-11 更新</span>
+              <span>📦 PDF | 25.6 MB</span>
+              <span>🔥 下载 35,680 次</span>
+            </div>
+          </div>
+          <button class="download-btn" onclick="showDownloadTip()">立即下载</button>
+        </article>
+        
+        <article class="resource-item">
+          <div class="resource-icon">📄</div>
+          <div class="resource-info">
+            <h4><a href="#">2023年国考真题及答案解析</a></h4>
+            <p>2023年国考行测申论真题试卷含答案</p>
+            <div class="resource-meta">
+              <span>📅 2023-11 更新</span>
+              <span>📦 PDF | 22.3 MB</span>
+              <span>🔥 下载 42,150 次</span>
+            </div>
+          </div>
+          <button class="download-btn" onclick="showDownloadTip()">立即下载</button>
+        </article>
+        
+        <article class="resource-item">
+          <div class="resource-icon">📄</div>
+          <div class="resource-info">
+            <h4><a href="#">国考历年真题汇总（2010-2024）</a></h4>
+            <p>近15年国考真题合集，高清无水印</p>
+            <div class="resource-meta">
+              <span>📅 2024-01 更新</span>
+              <span>📦 PDF | 180 MB</span>
+              <span>🔥 下载 28,900 次</span>
+            </div>
+          </div>
+          <button class="download-btn" onclick="showDownloadTip()">立即下载</button>
+        </article>
+        
+        <article class="resource-item">
+          <div class="resource-icon">📄</div>
+          <div class="resource-info">
+            <h4><a href="#">2024年国考大纲解析及备考指导</a></h4>
+            <p>最新国考大纲深度解读，备考方向指导</p>
+            <div class="resource-meta">
+              <span>📅 2024-10 更新</span>
+              <span>📦 PDF | 8.5 MB</span>
+              <span>🔥 下载 15,320 次</span>
+            </div>
+          </div>
+          <button class="download-btn" onclick="showDownloadTip()">立即下载</button>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

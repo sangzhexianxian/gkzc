@@ -1,0 +1,191 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// 静态数据 - 实际项目中会从 API 获取
+const categories = [
+  { icon: '🏛️', title: '国考资料', href: '/guokao.html', desc: '国家公务员考试资料，包含历年国考真题、行测申论真题卷、大纲解析', count: '800+ 份资料' },
+  { icon: '📋', title: '省考资料', href: '/shengkao.html', desc: '各省公务员考试资料，包含联考真题、自主命题省份真题、专项资料', count: '600+ 份资料' },
+  { icon: '📐', title: '行测资料', href: '/xingce.html', desc: '行政职业能力测验资料，包含言语理解、数量关系、判断推理、资料分析', count: '500+ 份资料' },
+  { icon: '📝', title: '申论资料', href: '/shenlun.html', desc: '申论备考资料，包含历年真题、答题模板、范文赏析、热点预测', count: '450+ 份资料' },
+  { icon: '👔', title: '面试资料', href: '/mianshi.html', desc: '公务员面试资料，包含结构化面试、无领导小组讨论、历年面试真题', count: '380+ 份资料' },
+  { icon: '📚', title: '综合资料', href: '/resources.html', desc: '备考规划、时政热点、选岗指导等综合类公考资料', count: '270+ 份资料' },
+];
+
+const hotResources = [
+  { icon: '📄', title: '2024年国考历年真题及答案解析（2010-2024）', desc: '包含近15年国考完整真题试卷及详细答案解析，PDF高清无水印版本', date: '2024-11 更新', size: 'PDF | 18.5 MB', downloads: '25,680 次' },
+  { icon: '📄', title: '行测高频考点速记手册（精华版）', desc: '行测各模块高频考点汇总，包含言语、数量、判断、资料分析核心知识点', date: '2024-10 更新', size: 'PDF | 9.2 MB', downloads: '18,340 次' },
+  { icon: '📄', title: '申论答题模板及万能套话', desc: '申论各题型答题模板，包含归纳概括、综合分析、提出对策、公文写作模板', date: '2024-09 更新', size: 'PDF | 6.8 MB', downloads: '21,560 次' },
+  { icon: '📄', title: '公务员面试技巧大全', desc: '结构化面试技巧、历年真题解析、常见问题回答范例', date: '2024-08 更新', size: 'PDF | 5.4 MB', downloads: '15,780 次' },
+];
+
+const defaultArticles = [
+  { id: '1', title: '2025年国考备考规划：各阶段复习重点', excerpt: '国考备考分为基础阶段、强化阶段和冲刺阶段，每个阶段的重点和方法各有不同...', date: '2025-04-15', source: '原创', tags: ['备考规划', '国考'] },
+  { id: '2', title: '行测言语理解高频成语汇总', excerpt: '历年行测言语理解中出现的高频成语，按出现频率排序，助你快速积累...', date: '2025-04-10', source: '原创', tags: ['行测', '言语'] },
+  { id: '3', title: '申论写作技巧：如何写出高分作文', excerpt: '申论作文是很多考生的痛点，本文分享高分作文的写作技巧和模板...', date: '2025-04-05', source: '原创', tags: ['申论', '写作技巧'] },
+];
+---
+
+<Layout title="公考资料网_公务员考试真题_国考_省考_申论_行测资料下载">
+  <Header />
+  
+  <!-- Hero 区域 -->
+  <section class="hero">
+    <div class="container">
+      <h2>公考资料一站式下载平台</h2>
+      <p>涵盖国考、省考、行测、申论、面试等全套备考资料，包含历年真题、高频考点、答题技巧等必备资源</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">3000+</div>
+          <div class="stat-label">公考资料</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">涵盖省份</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">30万+</div>
+          <div class="stat-label">服务考生</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">每日</div>
+          <div class="stat-label">持续更新</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主内容 -->
+  <main class="main-content">
+    <div class="container">
+      <!-- 分类卡片 -->
+      <section class="category-grid">
+        {categories.map(cat => (
+          <article class="category-card">
+            <div class="category-icon">{cat.icon}</div>
+            <h3><a href={cat.href}>{cat.title}</a></h3>
+            <p>{cat.desc}</p>
+            <span class="resources-count">📂 {cat.count}</span>
+          </article>
+        ))}
+      </section>
+
+      <!-- 热门资料下载 -->
+      <section class="mb-40">
+        <div class="section-title">
+          <h2>🔥 热门资料下载</h2>
+          <a href="/resources.html">查看全部 →</a>
+        </div>
+        <div class="resource-list">
+          {hotResources.map(res => (
+            <article class="resource-item">
+              <div class="resource-icon">{res.icon}</div>
+              <div class="resource-info">
+                <h4>{res.title}</h4>
+                <p>{res.desc}</p>
+                <div class="resource-meta">
+                  <span>📅 {res.date}</span>
+                  <span>📦 {res.size}</span>
+                  <span>🔥 下载 {res.downloads}</span>
+                </div>
+              </div>
+              <button class="download-btn" onclick="showDownloadTip()">立即下载</button>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- 最新文章 -->
+      <section class="mb-40">
+        <div class="section-title">
+          <h2>📰 最新公考资讯</h2>
+          <a href="/articles.html">查看全部 →</a>
+        </div>
+        <div class="articles-grid" id="latest-articles">
+          {defaultArticles.map(article => (
+            <article class="article-card">
+              <div class="article-image">📋</div>
+              <div class="article-content">
+                <h3><a href={`/articles/${article.id}.html`}>{article.title}</a></h3>
+                <p class="article-excerpt">{article.excerpt}</p>
+                <div class="article-meta">
+                  <span>{article.date}</span>
+                  <span>来源：{article.source}</span>
+                </div>
+                <div class="article-tags">
+                  {article.tags.map(tag => <span class="tag">{tag}</span>)}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- 联系区域 -->
+  <section style="background: var(--bg-white); padding: 50px 0;">
+    <div class="container">
+      <div class="section-title">
+        <h2>📱 联系我们</h2>
+      </div>
+      <div class="contact-section">
+        <div class="contact-card">
+          <h3>企业微信</h3>
+          <p>扫码添加企业微信，获取更多公考资料和最新资讯</p>
+          <img src="/images/wechat-qr.png" alt="企业微信二维码" style="width: 150px; border-radius: 8px;" />
+        </div>
+        <div class="contact-card">
+          <h3>备考交流群</h3>
+          <p>加入备考交流群，与考生一起交流学习</p>
+          <img src="/images/wechat-qr.png" alt="群二维码" style="width: 150px; border-radius: 8px;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  // 动态加载最新文章
+  async function loadLatestArticles() {
+    try {
+      const response = await fetch('/api/latest');
+      const result = await response.json();
+      
+      if (result.success && result.data && result.data.length > 0) {
+        const container = document.getElementById('latest-articles');
+        if (container) {
+          container.innerHTML = result.data.map(article => `
+            <article class="article-card">
+              <div class="article-image">📋</div>
+              <div class="article-content">
+                <h3><a href="/articles/${article.id}.html">${escapeHtml(article.title)}</a></h3>
+                <p class="article-excerpt">${escapeHtml(article.content.substring(0, 100))}...</p>
+                <div class="article-meta">
+                  <span>${new Date(article.publishTime).toLocaleDateString('zh-CN')}</span>
+                  <span>来源：${article.source}</span>
+                </div>
+                <div class="article-tags">
+                  ${article.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+                </div>
+              </div>
+            </article>
+          `).join('');
+        }
+      }
+    } catch (error) {
+      console.log('使用默认文章数据');
+    }
+  }
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  document.addEventListener('DOMContentLoaded', loadLatestArticles);
+</script>

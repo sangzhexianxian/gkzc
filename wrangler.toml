@@ -1,0 +1,13 @@
+name = "astro-gkzc"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "./dist"
+
+# KV 命名空间 - 用于存储文章数据
+[[kv_namespaces]]
+binding = "ARTICLES_KV"
+id = "YOUR_KV_NAMESPACE_ID"
+
+# 环境变量（在 Cloudflare Dashboard 中设置）
+[vars]
+SITE_NAME = "公考资料网"
+SITE_DOMAIN = "gkzc.example.com"

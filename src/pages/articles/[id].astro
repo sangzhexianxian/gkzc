@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { marked } from 'marked';
+
+// 从 URL 获取文章 ID
+const { id } = Astro.params;
+
+// 这里需要从 KV 获取，实际通过 API
+// 暂时使用静态数据作为演示
+const article = {
+  id: id,
+  title: '示例文章标题',
+  content: '文章内容将从 Cloudflare KV 动态加载',
+  category: 'general',
+  tags: ['公考', '备考'],
+  source: '扣子AI',
+  publishTime: new Date().toISOString()
+};
+---
+
+<Layout title={`${article.title} - 公考资料网`} description={article.content.substring(0, 150)}>
+  <Header />
+  
+  <main class="main-content">
+    <div class="container">
+      <div class="article-detail">
+        <article>
+          <header class="article-header">
+            <h1>{article.title}</h1>
+            <div class="article-meta">
+              <span>分类：{article.category}</span>
+              <span>发布时间：{new Date(article.publishTime).toLocaleDateString('zh-CN')}</span>
+              <span>来源：{article.source}</span>
+            </div>
+            <div class="article-tags">
+              {article.tags.map(tag => <span class="tag">{tag}</span>)}
+            </div>
+          </header>
+          <div class="article-content" set:html={marked.parse(article.content)} />
+        </article>
+        
+        <aside class="article-sidebar">
+          <div class="widget">
+            <h3>关注我们</h3>
+            <p>扫码添加企业微信，获取更多公考资料</p>
+            <img src="/images/wechat-qr.png" alt="企业微信二维码" class="qr-code" />
+          </div>
+          <div class="widget">
+            <h3>推荐资料</h3>
+            <ul class="resource-list">
+              <li><a href="/guokao.html">国考历年真题</a></li>
+              <li><a href="/shenlun.html">申论答题模板</a></li>
+              <li><a href="/xingce.html">行测高频考点</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>

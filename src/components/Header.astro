@@ -1,0 +1,22 @@
+---
+const navItems = [
+  { href: '/', label: '首页' },
+  { href: '/guokao.html', label: '国考资料' },
+  { href: '/shengkao.html', label: '省考资料' },
+  { href: '/xingce.html', label: '行测' },
+  { href: '/shenlun.html', label: '申论' },
+  { href: '/mianshi.html', label: '面试' },
+  { href: '/resources.html', label: '资料下载' },
+];
+---
+
+<header class="site-header">
+  <div class="container">
+    <h1><a href="/">公考资料网</a></h1>
+    <nav>
+      {navItems.map(item => (
+        <a href={item.href} title={item.label}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
