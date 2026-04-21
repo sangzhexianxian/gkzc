@@ -4,23 +4,50 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { marked } from 'marked';
 
-// 从 URL 获取文章 ID
-const { id } = Astro.params;
+// 使用 import.meta.glob 获取所有文章
+const posts = import.meta.glob('../../content/posts/*.md', { eager: true });
 
-// 这里需要从 KV 获取，实际通过 API
-// 暂时使用静态数据作为演示
-const article = {
-  id: id,
-  title: '示例文章标题',
-  content: '文章内容将从 Cloudflare KV 动态加载',
-  category: 'general',
-  tags: ['公考', '备考'],
-  source: '扣子AI',
-  publishTime: new Date().toISOString()
-};
+// 生成静态路径
+export function getStaticPaths() {
+  const paths = Object.entries(posts).map(([path, post]: [string, any]) => {
+    // 从 frontmatter 中获取 id，如果没有则从文件名提取
+    const id = post.frontmatter?.id || path.split('/').pop()?.replace('.md', '');
+    return {
+      params: { id },
+      props: { post }
+    };
+  });
+  
+  // 如果没有文章，返回空数组
+  return paths.length > 0 ? paths : [];
+}
+
+// 获取当前文章的 props
+const { post } = Astro.props;
+
+// 如果文章不存在，显示 404
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+const { title, category, tags, publishTime, source } = post.frontmatter;
+
+// 获取分类名称
+function getCategoryName(cat: string) {
+  const names: Record<string, string> = {
+    'guokao': '国考资料',
+    'shengkao': '省考资料',
+    'xingce': '行测',
+    'shenlun': '申论',
+    'mianshi': '面试',
+    'planning': '备考规划',
+    'general': '综合资讯'
+  };
+  return names[cat] || '综合资讯';
+}
 ---
 
-<Layout title={`${article.title} - 公考资料网`} description={article.content.substring(0, 150)}>
+<Layout title={`${title} - 公考资料网`} description={post.frontmatter.excerpt || title}>
   <Header />
   
   <main class="main-content">
@@ -28,17 +55,17 @@ const article = {
       <div class="article-detail">
         <article>
           <header class="article-header">
-            <h1>{article.title}</h1>
+            <h1>{title}</h1>
             <div class="article-meta">
-              <span>分类：{article.category}</span>
-              <span>发布时间：{new Date(article.publishTime).toLocaleDateString('zh-CN')}</span>
-              <span>来源：{article.source}</span>
+              <span>分类：{getCategoryName(category)}</span>
+              <span>发布时间：{new Date(publishTime).toLocaleDateString('zh-CN')}</span>
+              <span>来源：{source}</span>
             </div>
             <div class="article-tags">
-              {article.tags.map(tag => <span class="tag">{tag}</span>)}
+              {tags?.map((tag: string) => <span class="tag">{tag}</span>)}
             </div>
           </header>
-          <div class="article-content" set:html={marked.parse(article.content)} />
+          <div class="article-content" set:html={marked.parse(post.rawContent())} />
         </article>
         
         <aside class="article-sidebar">
