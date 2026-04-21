@@ -1,16 +1,6 @@
 import { defineConfig } from 'astro/config';
-import cloudflare from '@astrojs/cloudflare';
 
+// 纯静态网站配置 - 部署到 Cloudflare Pages
 export default defineConfig({
-  output: 'server',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
-  }),
-  vite: {
-    define: {
-      'process.env.KV': JSON.stringify(process.env.KV),
-    },
-  },
+  output: 'static',
 });
