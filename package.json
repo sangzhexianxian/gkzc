@@ -5,16 +5,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "deploy": "npm run build && wrangler pages deploy dist"
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^10.0.0",
     "astro": "^4.5.0",
     "marked": "^12.0.0"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240320.1",
-    "wrangler": "^3.0.0"
   }
 }
