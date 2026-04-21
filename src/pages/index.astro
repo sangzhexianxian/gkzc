@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// 静态数据 - 实际项目中会从 API 获取
+// 静态数据 - 网站内容
 const categories = [
   { icon: '🏛️', title: '国考资料', href: '/guokao.html', desc: '国家公务员考试资料，包含历年国考真题、行测申论真题卷、大纲解析', count: '800+ 份资料' },
   { icon: '📋', title: '省考资料', href: '/shengkao.html', desc: '各省公务员考试资料，包含联考真题、自主命题省份真题、专项资料', count: '600+ 份资料' },
@@ -20,10 +20,10 @@ const hotResources = [
   { icon: '📄', title: '公务员面试技巧大全', desc: '结构化面试技巧、历年真题解析、常见问题回答范例', date: '2024-08 更新', size: 'PDF | 5.4 MB', downloads: '15,780 次' },
 ];
 
-const defaultArticles = [
-  { id: '1', title: '2025年国考备考规划：各阶段复习重点', excerpt: '国考备考分为基础阶段、强化阶段和冲刺阶段，每个阶段的重点和方法各有不同...', date: '2025-04-15', source: '原创', tags: ['备考规划', '国考'] },
-  { id: '2', title: '行测言语理解高频成语汇总', excerpt: '历年行测言语理解中出现的高频成语，按出现频率排序，助你快速积累...', date: '2025-04-10', source: '原创', tags: ['行测', '言语'] },
-  { id: '3', title: '申论写作技巧：如何写出高分作文', excerpt: '申论作文是很多考生的痛点，本文分享高分作文的写作技巧和模板...', date: '2025-04-05', source: '原创', tags: ['申论', '写作技巧'] },
+const latestArticles = [
+  { id: '1', title: '2025年国考备考规划：各阶段复习重点', excerpt: '国考备考分为基础阶段、强化阶段和冲刺阶段，每个阶段的重点和方法各有不同。基础阶段建议用时3-4个月，主要进行知识点梳理和教材学习...', date: '2025-04-15', source: '原创', tags: ['备考规划', '国考'] },
+  { id: '2', title: '行测言语理解高频成语汇总', excerpt: '历年行测言语理解中出现的高频成语，按出现频率排序，助你快速积累。包含实词辨析、成语误用等高频考点...', date: '2025-04-10', source: '原创', tags: ['行测', '言语'] },
+  { id: '3', title: '申论写作技巧：如何写出高分作文', excerpt: '申论作文是很多考生的痛点，本文分享高分作文的写作技巧和模板。开头结尾技巧、论证方法、素材积累等方面全面解析...', date: '2025-04-05', source: '原创', tags: ['申论', '写作技巧'] },
 ];
 ---
 
@@ -102,8 +102,8 @@ const defaultArticles = [
           <h2>📰 最新公考资讯</h2>
           <a href="/articles.html">查看全部 →</a>
         </div>
-        <div class="articles-grid" id="latest-articles">
-          {defaultArticles.map(article => (
+        <div class="articles-grid">
+          {latestArticles.map(article => (
             <article class="article-card">
               <div class="article-image">📋</div>
               <div class="article-content">
@@ -147,45 +147,3 @@ const defaultArticles = [
 
   <Footer />
 </Layout>
-
-<script>
-  // 动态加载最新文章
-  async function loadLatestArticles() {
-    try {
-      const response = await fetch('/api/latest');
-      const result = await response.json();
-      
-      if (result.success && result.data && result.data.length > 0) {
-        const container = document.getElementById('latest-articles');
-        if (container) {
-          container.innerHTML = result.data.map(article => `
-            <article class="article-card">
-              <div class="article-image">📋</div>
-              <div class="article-content">
-                <h3><a href="/articles/${article.id}.html">${escapeHtml(article.title)}</a></h3>
-                <p class="article-excerpt">${escapeHtml(article.content.substring(0, 100))}...</p>
-                <div class="article-meta">
-                  <span>${new Date(article.publishTime).toLocaleDateString('zh-CN')}</span>
-                  <span>来源：${article.source}</span>
-                </div>
-                <div class="article-tags">
-                  ${article.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
-                </div>
-              </div>
-            </article>
-          `).join('');
-        }
-      }
-    } catch (error) {
-      console.log('使用默认文章数据');
-    }
-  }
-  
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-  
-  document.addEventListener('DOMContentLoaded', loadLatestArticles);
-</script>
